@@ -1,7 +1,20 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set file="C:\Users\owenm\OneDrive\Documents\ProgrammingProjects\simpleURLCLI\urls.txt"
+
+
+if not exist %cd%\urlData (
+    echo /n
+    echo No data folder in dir
+    echo Making urlData folder and urls.text file 
+    mkdir urlData
+    cd urlData
+    "" > urls.txt
+) else (
+    echo Hay Folder
+    set file="urlData\urls.txt"
+)
+
 
 if "%2"=="" (    
    if not "%1"=="" (

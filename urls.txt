@@ -1,4 +1,0 @@
-monkeytype@https://monkeytype.com/
-docs@https://docs.google.comtest
-keep@https://keep.google.com 
-schoology@https://stjohnsschools.schoology.com/home 
