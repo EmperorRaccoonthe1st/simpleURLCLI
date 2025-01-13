@@ -11,7 +11,7 @@ if exist "%cd%\urlData\" (
     ) else (
         echo. > urls.txt
         echo no urls file found
-        echo created no urls file
+        echo created new urls file
         exit
     )
 ) else (
