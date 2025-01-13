@@ -1,21 +1,33 @@
 @echo off
 setlocal enabledelayedexpansion
 
+set file=
 
-
-if not exist %cd%\urlData (
-    echo /n
-    echo No data folder in dir
-    echo Making urlData folder and urls.text file 
+:fileInnit
+if exist "%cd%\urlData\" (
+    if exist "%cd%\urlData\urls.txt" (
+        set file=urlData\urls.txt
+        GOTO main 
+    ) else (
+        echo. > urls.txt
+        echo no urls file found
+        echo created no urls file
+        exit
+    )
+) else (
+    echo cannot find urlData folder
+    echo creating urlData folder and urls.text file in local directory
     mkdir urlData
     cd urlData
-    "" > urls.txt
-) else (
-    echo Hay Folder
-    set file="urlData\urls.txt"
+    echo. > urls.txt
+    exit
 )
 
 
+
+
+
+:main
 if "%2"=="" (    
    if not "%1"=="" (
     for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
@@ -23,22 +35,22 @@ if "%2"=="" (
             set url=%%H
             if !alias!==%1 (
                 start !url!
-                GOTO end
+                exit
             )
         )
 
     ) else (
-        echo Make sure to pass an alias or tag
+        echo make sure to pass an alias or tag
+        exit
     )
 
 ) else (
     if "%2"=="-n" (
         echo %1 >> %file%
-
+        exit
     )   else (
         echo Pass "-n" to add a new alias. Split the alias and url by an "@"
+        exit
     )
 )
 endlocal
-
-:end
