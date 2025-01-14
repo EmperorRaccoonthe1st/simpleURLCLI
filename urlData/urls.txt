@@ -9,3 +9,4 @@ amazon@https://amazon.com/
 gmail@https://mail.google.com/ 
 autotempest@https://autotempest.com/ 
 maps@https://maps.google.com/ 
+chatgpt@https://chatgpt.com/ 

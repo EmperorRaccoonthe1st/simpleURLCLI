@@ -28,7 +28,7 @@ if exist "%cd%\urlData\" (
 
 
 :main
-if "%2"=="" (    
+if "%3"=="" (    
    if not "%1"=="" (
     for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
             set alias=%%G
@@ -45,11 +45,11 @@ if "%2"=="" (
     )
 
 ) else (
-    if "%2"=="-n" (
-        echo %1 >> %file%
+    if "%3"=="-n" (
+        echo %1@%2 >> %file%
         exit
     )   else (
-        echo Pass "-n" to add a new alias. Split the alias and url by an "@"
+        echo ass "-n" to add a new alias. First argument is the alias then followed by the url
         exit
     )
 )
