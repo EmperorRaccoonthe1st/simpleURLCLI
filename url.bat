@@ -7,7 +7,7 @@ set file=
 if exist "%cd%\urlData\" (
     if exist "%cd%\urlData\urls.txt" (
         set file=urlData\urls.txt
-        GOTO main 
+        GOTO subCommands 
     ) else (
         echo. > urls.txt
         echo no urls file found
@@ -22,6 +22,32 @@ if exist "%cd%\urlData\" (
     echo. > urls.txt
     exit
 )
+
+
+:subCommands
+if "%1"=="-l" (GOTO list)
+if "%1"=="-h" (GOTO help)
+if "%1"=="-ca" (GOTO changeAlias)
+if "%1"=="-cu" (GOTO changeURL)
+if "%1"=="-r" (GOTO removeLastChange)
+GOTO main
+
+:list
+
+
+
+:help
+
+
+:changeAlias
+
+
+:changeURL
+
+
+:removeLastChange
+
+
 
 
 
