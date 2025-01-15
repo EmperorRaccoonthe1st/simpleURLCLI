@@ -33,7 +33,13 @@ if "%1"=="-r" (GOTO removeLastChange)
 GOTO main
 
 :list
-
+echo all created alias:
+for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
+    set alias=%%G
+    set url=%%H
+    set "echoStatement=!alias! -> !url!"
+    echo !echoStatement!
+)
 
 
 :help
