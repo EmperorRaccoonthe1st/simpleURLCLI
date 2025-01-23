@@ -12,3 +12,5 @@ chatgpt@https://chatgpt.com/
 github@https://github.com/emperorraccoonthe1st/@ 
 gimkit@https://gimkit.com/me 
 onedrive@https://office.com/onedrive/ 
+scad@https://scad.edu/ 
+hac@https://homeaccess.stjohns.k12.fl.us/HomeAccess/Account/LogOn?ReturnUrl 

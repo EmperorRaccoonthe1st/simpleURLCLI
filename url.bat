@@ -27,8 +27,8 @@ if exist "%cd%\urlData\" (
 :subCommands
 if "%1"=="-l" (GOTO list)
 if "%1"=="-h" (GOTO help)
-if "%1"=="-ca" (GOTO changeAlias)
-if "%1"=="-cu" (GOTO changeURL)
+if "%1"=="-ea" (GOTO editAlias)
+if "%1"=="-eu" (GOTO changeURL)
 if "%1"=="-r" (GOTO removeLastChange)
 if "%1"=="-n" (GOTO newAlias)
 GOTO main
@@ -41,15 +41,31 @@ for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
     set "echoStatement=!alias! -> !url!"
     echo !echoStatement!
 )
-
+GOTO end
 
 
 :help
 
 
 
-:changeAlias
-
+:editAlias
+if not "%2"=="" ( 
+    if not "%3"=="" (
+        for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
+            set alias=%%G
+            set url=%%H
+            if %2==!alias! (
+                
+            )
+        )
+        echo %2 changed to %3
+    ) else (
+        echo make sure to pass the new alias
+    )
+) else (
+    echo make sure to pass the alias you want changed
+    )
+GOTO end
 
 
 :changeURL
@@ -61,16 +77,20 @@ for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
 
 
 :newAlias
-if not "%2"=="" (
-    echo %2@%3 >> %file%
-echo new alias created: %2 as %3
+if not "%2"=="" ( 
+    if not "%3"=="" (
+        echo %2@%3 >> %file%
+        echo new alias created: %2 as %3
+    ) else (
+        echo make sure to pass a url
+    )
 ) else (
     echo make sure to pass the alias and url 
 )
 
 
 :main
-if not "%~1"=="" (
+if not "%1"=="" (
     for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
             set alias=%%G
             set url=%%H
@@ -81,8 +101,8 @@ if not "%~1"=="" (
         )
 ) else (
     echo make sure to pass an alias or tag
-    echo pass "-l" to list all aliases
     echo pass  "-h" to get help
 )
 
+:end
 endlocal
