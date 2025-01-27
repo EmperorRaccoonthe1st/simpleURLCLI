@@ -27,8 +27,8 @@ if exist "%cd%\urlData\" (
 :subCommands
 if "%1"=="-l" (GOTO list)
 if "%1"=="-h" (GOTO help)
-if "%1"=="-ea" (GOTO editAlias)
-if "%1"=="-eu" (GOTO changeURL)
+if "%1"=="-ca" (GOTO changeAlias)
+if "%1"=="-cu" (GOTO changeURL)
 if "%1"=="-r" (GOTO removeLastChange)
 if "%1"=="-n" (GOTO newAlias)
 GOTO main
@@ -48,23 +48,29 @@ GOTO end
 
 
 
-:editAlias
+:changeAlias
 if not "%2"=="" ( 
     if not "%3"=="" (
+        echo. > urlData\tempurls.txt
+        set tempFile=urlData\tempurls.txt
         for /F "tokens=1,2 usebackq delims=@" %%G in (%file%) do (
             set alias=%%G
             set url=%%H
-            if %2==!alias! (
-                
+            if "%2"=="!alias!" (
+                echo %3@!URL! >> !tempFile!
+            )  else (
+                echo !alias!@!url! >> !tempFile!
             )
         )
-        echo %2 changed to %3
+        copy /y !tempFile! !file!
+        del /q !tempFile!
+        GOTO end
     ) else (
         echo make sure to pass the new alias
     )
 ) else (
     echo make sure to pass the alias you want changed
-    )
+)
 GOTO end
 
 
